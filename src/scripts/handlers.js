@@ -1,7 +1,7 @@
 function onSignIn(googleUser) {
   var id_token = googleUser.getAuthResponse().id_token;
 
-  fetch("/auth", {
+  fetch(`${config.api}/auth`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -39,7 +39,7 @@ function onAddNewJob() {
   }
   document.querySelector(`input[name=new-job]`).value = "";
 
-  fetch("/api/job", {
+  fetch(`${config.api}/api/job`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
