@@ -10,10 +10,6 @@ import Footer from "../../layout/Footer";
 
 import Button from "../../components/Button";
 
-const onSignIn = () => {
-  console.log("sign in...");
-};
-
 const Hero = () => (
   <div class={styles.hero}>
     <div>
@@ -39,7 +35,7 @@ const Features = () => (
   </ul>
 );
 
-const Landing = () => (
+const Landing = ({ onSignIn }) => (
   <div class={styles.landing}>
     <Header />
     <Main>
