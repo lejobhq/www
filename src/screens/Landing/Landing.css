@@ -10,6 +10,8 @@
   --hero-logo-width: 120px;
 
   --features-padding-left: 1.25rem;
+  --features-padding-top: 10vh;
+  --features-padding-bottom: 10vh;
   --feature-padding-bottom: 8px;
   --feature-before-content: "✓";
 }
@@ -46,7 +48,8 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  padding-top: var(--hero-padding-top);
+  padding-top: var(--features-padding-top);
+  padding-bottom: var(--features-padding-bottom);
   padding-left: var(--features-padding-left);
   position: relative;
 }
