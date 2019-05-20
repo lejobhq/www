@@ -1,7 +1,5 @@
 FROM node:12 as base
 
-ARG BABEL_ENV=production
-
 WORKDIR /usr/src/www
 COPY . .
 
