@@ -2,11 +2,12 @@
   "name": "www",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "",
   "scripts": {
-    "clean": "rm -rf build && mkdir build",
+    "clean": "rm -rf dist && mkdir dist",
     "prebuild": "npm run clean",
-    "build": "cp -R src/* build",
+    "build": "parcel build src/index.html",
+    "dev": "parcel src/index.html",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "repository": {
@@ -19,5 +20,33 @@
   "bugs": {
     "url": "https://github.com/lejobhq/www/issues"
   },
-  "homepage": "https://github.com/lejobhq/www#readme"
+  "homepage": "https://github.com/lejobhq/www#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-preact": "^1.1.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^2.3.0",
+    "lint-staged": "^8.1.7",
+    "parcel-bundler": "^1.12.3",
+    "postcss-modules": "^1.4.1",
+    "prettier": "^1.17.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "preact": "^8.4.2"
+  }
 }

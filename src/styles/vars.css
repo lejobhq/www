@@ -1,0 +1,15 @@
+:root {
+  --color-primary: #007777;
+  --color-secondary: #c65a00;
+  --color-secondary-lighter: #FFC798;
+
+  --color-black: #000D0D;
+
+  --font-family-primary: Futura, "Open Sans", Verdana, sans-serif;
+  --font-family-secondary: Geneva, Helvetica, Tahoma, sans-serif;
+
+  --font-size-small: 18px;
+
+  --header-height: 72px;
+  --footer-height: 72px;
+}

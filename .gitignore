@@ -91,4 +91,4 @@ firestore.keyfile.json
 .DS_Store
 
 # Build
-build
+dist

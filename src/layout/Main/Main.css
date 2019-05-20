@@ -1,0 +1,5 @@
+@import "../../styles/vars.css";
+
+.main {
+  min-height: calc(100vh - (var(--header-height) + var(--footer-height)));
+}

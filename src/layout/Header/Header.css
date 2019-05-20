@@ -1,0 +1,8 @@
+@import "../../styles/vars.css";
+
+.header {
+  background-color: var(--color-primary);
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+}

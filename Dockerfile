@@ -5,7 +5,7 @@ RUN npm run build
 
 FROM nginx
 COPY ./nginx.conf /etc/nginx/
-COPY --from=base ./build/. /usr/share/www/
+COPY --from=base ./dist/. /usr/share/www/
 
 EXPOSE 8080
 
