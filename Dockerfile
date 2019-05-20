@@ -1,9 +1,7 @@
-FROM node:10 as base
-
-COPY package*.json ./
-RUN npm install
+FROM node:12 as base
 
 COPY . .
+RUN npm install && cp -r node_modules src
 RUN npm run build
 
 FROM nginx
