@@ -23,6 +23,8 @@ class App extends Component {
 
     this.fetchInitialData = this.fetchInitialData.bind(this);
     this.parseHTTPResponse = this.parseHTTPResponse.bind(this);
+
+    this.backToLanding = this.backToLanding.bind(this);
   }
 
   componentDidMount() {
@@ -53,28 +55,37 @@ class App extends Component {
 
   fetchInitialData() {
     const { jwt } = this.state;
-    fetch(`${config.api}/api/user`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": jwt
-      }
-    })
-      .then(this.parseHTTPResponse)
-      .then(user => {
-        this.setState({ user });
-        fetch(`${config.api}/api/jobs`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "X-Access-Token": jwt
-          }
-        })
-          .then(this.parseHTTPResponse)
-          .then(jobs => this.setState({ jobs, route: "dashboard" }))
-          .catch(err => console.error(err));
+
+    Promise.all([
+      fetch(`${config.api}/api/user`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": jwt
+        }
       })
-      .catch(err => console.error(err));
+        .then(this.parseHTTPResponse)
+        .then(({ data }) => {
+          this.setState({ user: data });
+        })
+        .catch(err => {
+          console.error(err);
+          throw new Error(err);
+        }),
+      fetch(`${config.api}/api/jobs`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": jwt
+        }
+      })
+        .then(this.parseHTTPResponse)
+        .then(({ data }) => this.setState({ jobs: data.jobs }))
+        .catch(err => {
+          console.error(err);
+          throw new Error(err);
+        })
+    ]).then(_ => this.setState({ route: "dashboard" }));
   }
 
   parseHTTPResponse(res) {
@@ -101,13 +112,15 @@ class App extends Component {
     if (!window.gapi.auth2) {
       return;
     }
+    this.setState({ route: "loading" });
     const auth2 = window.gapi.auth2.getAuthInstance();
-    auth2
-      .signIn()
-      .then(
-        googleUser => this.handleSigninSuccess(googleUser),
-        err => console.error(err)
-      );
+    auth2.signIn().then(
+      googleUser => this.handleSigninSuccess(googleUser),
+      err => {
+        console.error(err);
+        this.setState({ route: "error" });
+      }
+    );
   }
 
   onLogOut(e) {
@@ -120,7 +133,10 @@ class App extends Component {
         localStorage.removeItem("jwt");
         this.setState({ jwt: null, route: "landing" });
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        this.setState({ route: "error" });
+      });
   }
 
   handleSigninSuccess(googleUser) {
@@ -138,7 +154,14 @@ class App extends Component {
         localStorage.setItem("jwt", jwt);
         this.setState({ jwt }, this.fetchInitialData);
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        this.setState({ route: "error" });
+      });
+  }
+
+  backToLanding() {
+    this.setState({ route: "landing" });
   }
 
   render({}, { route, user, jobs }) {
@@ -150,9 +173,9 @@ class App extends Component {
       case "dashboard":
         return <Dashboard user={user} jobs={jobs} onLogOut={this.onLogOut} />;
       case "error":
-        return <Error />;
+        return <Error backToLanding={this.backToLanding} />;
       default:
-        return <NotFound />;
+        return <NotFound backToLanding={this.backToLanding} />;
     }
   }
 }
