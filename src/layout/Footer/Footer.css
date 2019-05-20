@@ -5,22 +5,21 @@
   color: var(--color-secondary-lighter);
   height: var(--footer-height);
   font-family: var(--font-family-secondary);
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-m);
 
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
+  .footer p {
+    margin: 0;
+  }
 
-.footer p {
-  margin: 0;
-}
-
-.footer a {
-  color: var(--color-secondary-lighter);
-  text-decoration: none;
-}
-.footer a:hover {
-  text-decoration: underline;
-}
+  .footer a {
+    color: var(--color-secondary-lighter);
+    text-decoration: none;
+  }
+    .footer a:hover {
+      text-decoration: underline;
+    }

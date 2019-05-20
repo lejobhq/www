@@ -1,14 +1,21 @@
 :root {
   --color-primary: #007777;
   --color-secondary: #c65a00;
-  --color-secondary-lighter: #FFC798;
+  --color-secondary-lighter: #ffc798;
 
-  --color-black: #000D0D;
+  --color-black: #000d0d;
+  --color-white: #ffffff;
 
   --font-family-primary: Futura, "Open Sans", Verdana, sans-serif;
   --font-family-secondary: Geneva, Helvetica, Tahoma, sans-serif;
 
-  --font-size-small: 18px;
+  --font-size-xs: 0.5rem;
+  --font-size-s: 0.75rem;
+  --font-size-m: 1rem;
+  --font-size-l: 1.5rem;
+  --font-size-xl: 2rem;
+  --font-size-xxl: 2.5rem;
+  --font-size-xxxl: 4rem;
 
   --header-height: 72px;
   --footer-height: 72px;
