@@ -4,6 +4,8 @@ import config from "./config";
 
 import Landing from "./screens/Landing";
 import Loading from "./screens/Loading";
+import Error from "./screens/Error";
+import NotFound from "./screens/NotFound";
 
 class App extends Component {
   constructor() {
@@ -20,12 +22,20 @@ class App extends Component {
 
     const parseHTTPResponse = res => {
       if (!res.ok) {
+        localStorage.removeItem("jwt");
+
         if (res.status === 401) {
-          localStorage.removeItem("jwt");
           this.setState({ route: "landing" });
+        } else if (res.status === 404) {
+          this.setState({ route: "not-found" });
+        } else {
+          this.setState({ route: "error" });
         }
+
         throw new Error(`Error ${res.status}: ${res.statusText}`);
       }
+
+      // All good!
       return res.json();
     };
 
@@ -48,13 +58,9 @@ class App extends Component {
         })
           .then(parseHTTPResponse)
           .then(jobs => this.setState({ jobs, route: "dashboard" }))
-          .catch(err => {
-            console.error(err);
-          });
+          .catch(err => console.error(err));
       })
-      .catch(err => {
-        console.error(err);
-      });
+      .catch(err => console.error(err));
   }
 
   render({}, { route }) {
@@ -63,8 +69,10 @@ class App extends Component {
         return <Loading />;
       case "landing":
         return <Landing />;
+      case "error":
+        return <Error />;
       default:
-        return <div>Hello, world!</div>;
+        return <NotFound />;
     }
   }
 }
