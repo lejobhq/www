@@ -28,5 +28,5 @@
 
 .secondary {
   background-color: var(--color-white);
-  color: var(--color-secondary);
+  color: var(--color-complementary);
 }
