@@ -1,0 +1,19 @@
+@import "../../styles/vars.css";
+
+:root {
+  --banner-padding-top: 4vh;
+}
+
+.dashboard {}
+  .banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--banner-padding-top);
+  }
+    .welcome {
+      display: inline-block;
+      margin: 0;
+      font-family: var(--font-family-secondary);
+      font-size: var(--font-size-xxl);
+    }

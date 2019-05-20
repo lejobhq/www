@@ -43,4 +43,7 @@
 
   --header-height: 72px;
   --footer-height: 72px;
+
+  --main-width: 88vw;
+  --main-max-width: 1024px;
 }

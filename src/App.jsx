@@ -8,12 +8,15 @@ import Dashboard from "./screens/Dashboard";
 import Error from "./screens/Error";
 import NotFound from "./screens/NotFound";
 
+import Overlay from "./layout/Overlay";
+
 class App extends Component {
   constructor() {
     super();
     const jwt = localStorage.getItem("jwt");
     this.state = {
       route: "loading",
+      overlay: false,
       jwt
     };
 
@@ -25,6 +28,9 @@ class App extends Component {
     this.parseHTTPResponse = this.parseHTTPResponse.bind(this);
 
     this.backToLanding = this.backToLanding.bind(this);
+
+    this.onAddNewJob = this.onAddNewJob.bind(this);
+    this.dismissOverlay = this.dismissOverlay.bind(this);
   }
 
   componentDidMount() {
@@ -164,19 +170,48 @@ class App extends Component {
     this.setState({ route: "landing" });
   }
 
-  render({}, { route, user, jobs }) {
+  onAddNewJob() {
+    console.log("TODO");
+    this.setState({ overlay: true });
+  }
+
+  dismissOverlay() {
+    this.setState({ overlay: false });
+  }
+
+  render({}, { route, overlay, user, jobs }) {
+    let MainComp;
     switch (route) {
       case "loading":
-        return <Loading />;
+        MainComp = () => <Loading />;
+        break;
       case "landing":
-        return <Landing onSignIn={this.onSignIn} />;
+        MainComp = () => <Landing onSignIn={this.onSignIn} />;
+        break;
       case "dashboard":
-        return <Dashboard user={user} jobs={jobs} onLogOut={this.onLogOut} />;
+        MainComp = () => (
+          <Dashboard
+            user={user}
+            jobs={jobs}
+            onLogOut={this.onLogOut}
+            onAddNewJob={this.onAddNewJob}
+          />
+        );
+        break;
       case "error":
-        return <Error backToLanding={this.backToLanding} />;
+        MainComp = () => <Error backToLanding={this.backToLanding} />;
+        break;
       default:
-        return <NotFound backToLanding={this.backToLanding} />;
+        MainComp = () => <NotFound backToLanding={this.backToLanding} />;
+        break;
     }
+
+    return (
+      <div>
+        <MainComp />
+        {overlay && <Overlay dismissOverlay={this.dismissOverlay} />}
+      </div>
+    );
   }
 }
 

@@ -2,7 +2,7 @@
 
 .main {
   min-height: calc(100vh - (var(--header-height) + var(--footer-height)));
-  width: 88vw;
-  max-width: 1024px;
+  width: var(--main-width);
+  max-width: var(--main-max-width);
   margin: auto;
 }

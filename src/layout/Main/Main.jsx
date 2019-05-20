@@ -1,11 +1,7 @@
-import preact from 'preact'
+import preact from "preact";
 
-import styles from './Main.css'
+import styles from "./Main.css";
 
-const Main = ({children}) => (
-  <main class={styles.main}>
-    {children}
-  </main>
-)
+const Main = ({ children }) => <main class={styles.main}>{children}</main>;
 
-export default Main
+export default Main;

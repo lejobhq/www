@@ -1,10 +1,11 @@
-import preact from 'preact'
+import preact from "preact";
 
-import styles from './Header.css'
+import styles from "./Header.css";
 
-const Header = ({ children }) => 
+const Header = ({ children }) => (
   <header class={styles.header}>
-    {children}
+    <span class={styles.content}>{children}</span>
   </header>
+);
 
-export default Header
+export default Header;
