@@ -9,7 +9,7 @@ import Footer from "../../layout/Footer";
 import Button from "../../components/Button";
 import { STATUS } from "../../consts";
 
-const Banner = ({ name, onLogOut, onAddNewJob }) => (
+const Banner = ({ name, onLogOut, onAddNewJobButton }) => (
   <div class={styles.banner}>
     <div>
       <p class={styles.welcome}>Welcome {name}!</p>
@@ -18,14 +18,14 @@ const Banner = ({ name, onLogOut, onAddNewJob }) => (
       </Button>
     </div>
     <div>
-      <Button type="primary" handler={onAddNewJob}>
+      <Button type="primary" handler={onAddNewJobButton}>
         + Add a new job
       </Button>
     </div>
   </div>
 );
 
-const Dashboard = ({ user, jobs, onLogOut, onAddNewJob }) => {
+const Dashboard = ({ user, jobs, onLogOut, onAddNewJobButton }) => {
   const jobsCreated = jobs.filter(
     // TODO: Directly read the 'status' value
     ({ timeline }) => timeline.slice(-1).pop().status === STATUS.CREATED
@@ -42,14 +42,18 @@ const Dashboard = ({ user, jobs, onLogOut, onAddNewJob }) => {
         <Banner
           name={user.given_name}
           onLogOut={onLogOut}
-          onAddNewJob={onAddNewJob}
+          onAddNewJobButton={onAddNewJobButton}
         />
         <div class={styles.overview}>
           <p class={styles.subtitle}>Your job applications' status</p>
-          <ul class={styles.list}>
-            <li>{jobsCreated.length} created</li>
-            <li>{jobsApplied.length} applied</li>
-          </ul>
+          {jobs.length ? (
+            <ul class={styles.list}>
+              {jobsCreated.length && <li>{jobsCreated.length} created</li>}
+              {jobsApplied.length && <li>{jobsApplied.length} applied</li>}
+            </ul>
+          ) : (
+            <p>No jobs ...</p>
+          )}
         </div>
       </Main>
       <Footer />

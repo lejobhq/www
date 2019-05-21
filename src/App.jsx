@@ -8,6 +8,11 @@ import Dashboard from "./screens/Dashboard";
 import Error from "./screens/Error";
 import NotFound from "./screens/NotFound";
 
+import AddJob from "./screens/AddJob";
+import EditJob from "./screens/EditJob";
+import ShowJob from "./screens/ShowJob";
+import OverlayLoading from "./screens/OverlayLoading";
+
 import Overlay from "./layout/Overlay";
 
 class App extends Component {
@@ -29,8 +34,9 @@ class App extends Component {
 
     this.backToLanding = this.backToLanding.bind(this);
 
+    this.onAddNewJobButton = this.onAddNewJobButton.bind(this);
+    this.onDismissOverlay = this.onDismissOverlay.bind(this);
     this.onAddNewJob = this.onAddNewJob.bind(this);
-    this.dismissOverlay = this.dismissOverlay.bind(this);
   }
 
   componentDidMount() {
@@ -53,7 +59,10 @@ class App extends Component {
                 this.setState({ route: "landing" });
               }
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+              console.error(err);
+              this.setState({ route: "error" });
+            });
         }
       });
     }
@@ -170,13 +179,52 @@ class App extends Component {
     this.setState({ route: "landing" });
   }
 
-  onAddNewJob() {
-    console.log("TODO");
-    this.setState({ overlay: true });
+  onAddNewJobButton() {
+    this.setState({ overlay: "add-job" });
   }
 
-  dismissOverlay() {
+  onDismissOverlay() {
     this.setState({ overlay: false });
+  }
+
+  onAddNewJob({ url, notes }) {
+    this.setState({ overlay: "loading" });
+    const { jwt } = this.state;
+    if (!jwt) {
+      this.setState({ overlay: false, route: "error" });
+      return;
+    }
+
+    fetch(`${config.api}/api/job`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Access-Token": jwt
+      },
+      body: JSON.stringify({ url, metadata: { notes } })
+    })
+      .then(this.parseHTTPResponse)
+      .then(_ => {
+        // TODO: Ideally, we'd just fetch the job's specific data, and not all the jobs again
+        return fetch(`${config.api}/api/jobs`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Access-Token": jwt
+          }
+        })
+          .then(this.parseHTTPResponse)
+          .then(({ data }) => this.setState({ jobs: data.jobs }))
+          .catch(err => {
+            console.error(err);
+            throw new Error(err);
+          });
+      })
+      .then(_ => this.setState({ overlay: false, route: "dashboard" }))
+      .catch(err => {
+        console.error(err);
+        this.setState({ overlay: false, route: "error" });
+      });
   }
 
   render({}, { route, overlay, user, jobs }) {
@@ -194,7 +242,7 @@ class App extends Component {
             user={user}
             jobs={jobs}
             onLogOut={this.onLogOut}
-            onAddNewJob={this.onAddNewJob}
+            onAddNewJobButton={this.onAddNewJobButton}
           />
         );
         break;
@@ -203,13 +251,40 @@ class App extends Component {
         break;
       default:
         MainComp = () => <NotFound backToLanding={this.backToLanding} />;
+    }
+
+    let OverlayComp;
+    switch (overlay) {
+      case "add-job":
+        OverlayComp = () => (
+          <AddJob
+            onDismissOverlay={this.onDismissOverlay}
+            onAddNewJob={this.onAddNewJob}
+          />
+        );
         break;
+      case "show-job":
+        OverlayComp = () => <ShowJob />;
+        break;
+      case "edit-job":
+        OverlayComp = () => <EditJob />;
+        break;
+      case "loading":
+        OverlayComp = () => <OverlayLoading />;
+        break;
+      default:
+        OverlayComp = null;
     }
 
     return (
       <div>
         <MainComp />
-        {overlay && <Overlay dismissOverlay={this.dismissOverlay} />}
+        {overlay && (
+          <Overlay
+            onDismissOverlay={this.onDismissOverlay}
+            Comp={OverlayComp}
+          />
+        )}
       </div>
     );
   }
