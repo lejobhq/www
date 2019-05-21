@@ -2,6 +2,7 @@
 
 :root {
   --banner-padding-top: 4vh;
+  --banner-welcome-margin-right: 8px;
 
   --overview-padding-top: 4vh;
   --overview-list-padding: 8px 0;
@@ -23,6 +24,7 @@
       margin: 0;
       font-family: var(--font-family-secondary);
       font-size: var(--font-size-xxl);
+      margin-right: var(--banner-welcome-margin-right);
     }
 
   .overview {

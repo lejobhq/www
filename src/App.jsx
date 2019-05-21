@@ -293,12 +293,11 @@ class App extends Component {
     return (
       <div>
         <MainComp />
-        {overlay && (
-          <Overlay
-            onDismissOverlay={this.onDismissOverlay}
-            Comp={OverlayComp}
-          />
-        )}
+        <Overlay
+          overlay={overlay}
+          onDismissOverlay={this.onDismissOverlay}
+          Comp={OverlayComp}
+        />
       </div>
     );
   }

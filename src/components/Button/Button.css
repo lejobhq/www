@@ -10,7 +10,6 @@
 
 .button {
   display: inline-block;
-  padding: var(--button-padding);
   border-radius: var(--button-border-radius);
   font-family: var(--font-family-secondary);
   font-size: var(--font-size-m);
@@ -24,6 +23,7 @@
   background-color: var(--color-primary);
   color: var(--color-white);
   box-shadow: var(--button-primary-box-shadow);
+  padding: var(--button-padding);
 }
 
 .secondary {
