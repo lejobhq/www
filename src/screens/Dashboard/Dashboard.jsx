@@ -7,7 +7,6 @@ import Main from "../../layout/Main";
 import Footer from "../../layout/Footer";
 
 import Button from "../../components/Button";
-import { STATUS } from "../../consts";
 
 const Banner = ({ name, onLogOut, onAddNewJobButton }) => (
   <div class={styles.banner}>
@@ -25,14 +24,14 @@ const Banner = ({ name, onLogOut, onAddNewJobButton }) => (
   </div>
 );
 
-const Dashboard = ({ user, jobs, onLogOut, onAddNewJobButton }) => {
+const Dashboard = ({ user, jobs, status, onLogOut, onAddNewJobButton }) => {
   const jobsCreated = jobs.filter(
     // TODO: Directly read the 'status' value
-    ({ timeline }) => timeline.slice(-1).pop().status === STATUS.CREATED
+    ({ timeline }) => timeline.slice(-1).pop().status === status.CREATED
   );
   const jobsApplied = jobs.filter(
     // TODO: Directly read the 'status' value
-    ({ timeline }) => timeline.slice(-1).pop().status === STATUS.APPLIED
+    ({ timeline }) => timeline.slice(-1).pop().status === status.APPLIED
   );
 
   return (

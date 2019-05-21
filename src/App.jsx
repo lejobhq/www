@@ -99,6 +99,19 @@ class App extends Component {
         .catch(err => {
           console.error(err);
           throw new Error(err);
+        }),
+      fetch(`${config.api}/api/status`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": jwt
+        }
+      })
+        .then(this.parseHTTPResponse)
+        .then(({ data }) => this.setState({ status: data.status }))
+        .catch(err => {
+          console.error(err);
+          throw new Error(err);
         })
     ]).then(_ => this.setState({ route: "dashboard" }));
   }
@@ -227,7 +240,7 @@ class App extends Component {
       });
   }
 
-  render({}, { route, overlay, user, jobs }) {
+  render({}, { route, overlay, user, jobs, status }) {
     let MainComp;
     switch (route) {
       case "loading":
@@ -241,6 +254,7 @@ class App extends Component {
           <Dashboard
             user={user}
             jobs={jobs}
+            status={status}
             onLogOut={this.onLogOut}
             onAddNewJobButton={this.onAddNewJobButton}
           />
