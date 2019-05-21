@@ -2,6 +2,13 @@
 
 :root {
   --banner-padding-top: 4vh;
+
+  --overview-padding-top: 4vh;
+  --overview-list-padding: 8px 0;
+  --overview-list-element-margin-right: 16px;
+  --overview-list-element-text-margin-left: 8px;
+  --overview-tag-height: 27px;
+  --overview-tag-width: 27px;
 }
 
 .dashboard {}
@@ -17,3 +24,33 @@
       font-family: var(--font-family-secondary);
       font-size: var(--font-size-xxl);
     }
+
+  .overview {
+    padding-top: var(--overview-padding-top);
+  }
+    .subtitle {
+      color: var(--color-secondary-1-grey);
+      font-family: var(--font-family-primary);
+      font-size: var(--font-size-s);
+      margin: 0;
+    }
+    .list {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: var(--overview-list-padding);
+    }
+      .list li {
+        display: flex;
+        margin-right: var(--overview-list-element-margin-right);
+        align-items: center;
+      }
+        .list li img {
+          height: var(--overview-tag-height);
+          width: var(--overview-tag-width);
+        }
+        .list li span {
+          font-family: var(--font-family-primary);
+          font-size: var(--font-size-m);
+          margin-left: var(--overview-list-element-text-margin-left);
+        }

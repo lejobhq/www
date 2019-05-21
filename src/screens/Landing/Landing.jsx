@@ -2,7 +2,7 @@ import preact from "preact";
 
 import styles from "./Landing.css";
 
-import logo from "./images/logo.png";
+import logo from "../../images/logo.png";
 
 import Header from "../../layout/Header";
 import Main from "../../layout/Main";
