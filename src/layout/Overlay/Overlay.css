@@ -27,8 +27,8 @@
 .content {
   position: absolute;
   top: 0;
-  min-height: calc(var(--overlay-min-height) - 2*var(--content-padding));
-  width: var(--content-width);
+  min-height: calc(var(--overlay-min-height) - 2 * var(--content-padding));
+  width: calc(var(--content-width) - 2 * var(--content-padding));
   background-color: var(--color-white);
   padding: var(--content-padding);
 
