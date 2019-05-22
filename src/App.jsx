@@ -250,7 +250,7 @@ class App extends Component {
     this.setState({ overlay: "edit-job", job });
   }
 
-  render({}, { route, overlay, user, jobs, status }) {
+  render({}, { route, overlay, user, jobs, status, job }) {
     let MainComp;
     switch (route) {
       case "loading":
@@ -290,7 +290,14 @@ class App extends Component {
         );
         break;
       case "show-job":
-        OverlayComp = () => <ShowJob />;
+        OverlayComp = () => (
+          <ShowJob
+            job={job}
+            status={status}
+            onDismissOverlay={this.onDismissOverlay}
+            onEditJob={this.onEditJob}
+          />
+        );
         break;
       case "edit-job":
         OverlayComp = () => <EditJob />;
