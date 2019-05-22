@@ -37,6 +37,8 @@ class App extends Component {
     this.onAddNewJobButton = this.onAddNewJobButton.bind(this);
     this.onDismissOverlay = this.onDismissOverlay.bind(this);
     this.onAddNewJob = this.onAddNewJob.bind(this);
+    this.onViewJob = this.onViewJob.bind(this);
+    this.onEditJob = this.onEditJob.bind(this);
   }
 
   componentDidMount() {
@@ -240,6 +242,14 @@ class App extends Component {
       });
   }
 
+  onViewJob(job) {
+    this.setState({ overlay: "show-job", job });
+  }
+
+  onEditJob(job) {
+    this.setState({ overlay: "edit-job", job });
+  }
+
   render({}, { route, overlay, user, jobs, status }) {
     let MainComp;
     switch (route) {
@@ -257,6 +267,8 @@ class App extends Component {
             status={status}
             onLogOut={this.onLogOut}
             onAddNewJobButton={this.onAddNewJobButton}
+            onViewJob={this.onViewJob}
+            onEditJob={this.onEditJob}
           />
         );
         break;
