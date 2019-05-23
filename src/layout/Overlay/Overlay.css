@@ -1,8 +1,6 @@
 @import "../../styles/vars.css";
 
 :root {
-  --overlay-min-height: 100vh;
-  --overlay-width: 100vw;
   --overlay-opacity: .62;
 
   --content-width: 50vw;
@@ -13,20 +11,24 @@
 }
 
 .overlay {
-  min-height: var(--overlay-min-height);
-  width: var(--overlay-width);
   background-color: var(--color-complementary-darker);
   opacity: var(--overlay-opacity);
-  position: absolute;
+  position: fixed;
   top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
   .hidden {
     display: none;
   }
 
 .content {
-  position: absolute;
+  position: fixed;
   top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   height: calc(var(--overlay-min-height) - 2 * var(--content-padding));
   width: calc(var(--content-width) - 2 * var(--content-padding));
   background-color: var(--color-white);
