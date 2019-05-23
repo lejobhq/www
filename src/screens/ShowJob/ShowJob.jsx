@@ -13,6 +13,8 @@ import tagNotInterested from "../../images/tag_not-interested.svg";
 import tagOffer from "../../images/tag_offer.svg";
 import tagRejected from "../../images/tag_rejected.svg";
 
+import editIcon from "../../images/edit.svg";
+
 function statusToTag(
   {
     CREATED,
@@ -73,17 +75,23 @@ const ShowJob = ({ job, status, onDismissOverlay, onEditJob }) => (
       <Button type="close" handler={onDismissOverlay}>
         Close
       </Button>
-      <Button type="primary" handler={() => onEditJob(job)}>
-        Edit
-      </Button>
     </div>
     <h2 class={styles.title}>
       <a href={job.url} taget="_blank">
         {job.title} <span>at</span> {job.company}
       </a>
+      <img
+        class={styles.icon}
+        src={editIcon}
+        alt="edit"
+        title="Edit"
+        onClick={() => onEditJob(job)}
+        role="presentation"
+      />
     </h2>
     <div class={styles.body}>
       <div class={styles.right}>
+        <img src={job.logo} class={styles.logo} alt="logo" />
         <div class={styles.status}>
           <p class={styles.label}>Status</p>
           <div class={styles.content}>
@@ -99,12 +107,16 @@ const ShowJob = ({ job, status, onDismissOverlay, onEditJob }) => (
             <ul>
               {job.timeline.map(event => (
                 <li>
-                  <img src={statusToTag(status, event.status)} alt="Tag" />
-                  <span>
-                    {event.status.charAt(0) +
-                      event.status.slice(1).toLowerCase()}
+                  <span class={styles.date}>
+                    {new Date(event.date).toLocaleDateString()}
                   </span>
-                  <span>{new Date(event.date).toLocaleDateString()}</span>
+                  <div class={styles.tag}>
+                    <img src={statusToTag(status, event.status)} alt="Tag" />
+                    <span>
+                      {event.status.charAt(0) +
+                        event.status.slice(1).toLowerCase()}
+                    </span>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -112,7 +124,6 @@ const ShowJob = ({ job, status, onDismissOverlay, onEditJob }) => (
         </div>
       </div>
       <div class={styles.left}>
-        <img src={job.logo} class={styles.logo} alt="logo" />
         <div class={styles.technologies}>
           <p class={styles.label}>Technologies</p>
           <div class={styles.content}>
