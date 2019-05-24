@@ -39,6 +39,7 @@ class App extends Component {
     this.onAddNewJob = this.onAddNewJob.bind(this);
     this.onViewJob = this.onViewJob.bind(this);
     this.onEditJob = this.onEditJob.bind(this);
+    this.onSaveJob = this.onSaveJob.bind(this);
   }
 
   componentDidMount() {
@@ -250,6 +251,41 @@ class App extends Component {
     this.setState({ overlay: "edit-job", job });
   }
 
+  onSaveJob({ usersJobId, status, metadata }) {
+    const { jwt } = this.state;
+    this.setState({ overlay: "loading" });
+    fetch(`${config.api}/api/job`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Access-Token": jwt
+      },
+      body: JSON.stringify({ usersJobId, status, metadata })
+    })
+      .then(this.parseHTTPResponse)
+      .then(_ => {
+        // TODO: Ideally, we'd just fetch the job's specific data, and not all the jobs again
+        return fetch(`${config.api}/api/jobs`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Access-Token": jwt
+          }
+        })
+          .then(this.parseHTTPResponse)
+          .then(({ data }) => this.setState({ jobs: data.jobs }))
+          .catch(err => {
+            console.error(err);
+            throw new Error(err);
+          });
+      })
+      .then(_ => this.setState({ overlay: false, route: "dashboard" }))
+      .catch(err => {
+        console.error(err);
+        this.setState({ overlay: false, route: "error" });
+      });
+  }
+
   render({}, { route, overlay, user, jobs, status, job }) {
     let MainComp;
     switch (route) {
@@ -300,7 +336,14 @@ class App extends Component {
         );
         break;
       case "edit-job":
-        OverlayComp = () => <EditJob />;
+        OverlayComp = () => (
+          <EditJob
+            job={job}
+            status={status}
+            onDismissOverlay={this.onDismissOverlay}
+            onSaveJob={this.onSaveJob}
+          />
+        );
         break;
       case "loading":
         OverlayComp = () => <OverlayLoading />;

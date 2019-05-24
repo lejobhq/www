@@ -449,16 +449,16 @@ const Dashboard = ({
   );
   const jobsInterview = jobs.filter(job =>
     [
-      job.status.INERVIEW_ROUND_1,
-      job.status.INERVIEW_ROUND_2,
-      job.status.INERVIEW_ROUND_3,
-      job.status.INERVIEW_ROUND_4,
-      job.status.INERVIEW_ROUND_5,
-      job.status.INERVIEW_ROUND_6,
-      job.status.INERVIEW_ROUND_7,
-      job.status.INERVIEW_ROUND_8,
-      job.status.INERVIEW_ROUND_9,
-      job.status.INERVIEW_ROUND_10
+      job.status.INTERVIEW_ROUND_1,
+      job.status.INTERVIEW_ROUND_2,
+      job.status.INTERVIEW_ROUND_3,
+      job.status.INTERVIEW_ROUND_4,
+      job.status.INTERVIEW_ROUND_5,
+      job.status.INTERVIEW_ROUND_6,
+      job.status.INTERVIEW_ROUND_7,
+      job.status.INTERVIEW_ROUND_8,
+      job.status.INTERVIEW_ROUND_9,
+      job.status.INTERVIEW_ROUND_10
     ].includes(status)
   );
   const jobsOffer = jobs.filter(job => job.status === status.OFFER);

@@ -16,7 +16,6 @@ class AddJob extends Component {
   }
 
   handleChange({ target: { name, value } }) {
-    console.log({ name: value });
     this.setState({ [name]: value });
   }
 
@@ -42,7 +41,11 @@ class AddJob extends Component {
           </label>
           <label>
             <span>Notes</span>
-            <textarea name="notes" placeholder="(Optional)">
+            <textarea
+              name="notes"
+              placeholder="(Optional)"
+              onChange={this.handleChange}
+            >
               {notes}
             </textarea>
           </label>
