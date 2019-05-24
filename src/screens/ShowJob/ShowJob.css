@@ -13,9 +13,13 @@
   --body-status-text-margin-left: 8px;
   --body-status-tag-height: 27px;
   --body-status-tag-width: 27px;
-  --body-timeline-content-tag-padding-left: 16px;
+  --body-timeline-content-margin-bottom: 16px;
   --body-timeline-content-date-padding: 8px 16px;
-  --body-timeline-content-date-border-right: 1px solid var(--color-primary-grey);
+  --body-timeline-content-date-width: 25%;
+  --body-timeline-content-tag-padding-left: 16px;
+  --body-timeline-content-metadata-padding-left: 36px;
+  --body-timeline-content-metadata-margin-top: 8px;
+  --body-timeline-content-metadata-data-margin-top: 4px;
   --body-technologies-content-margin-left: 8px;
   --body-technologies-content-margin-bottom: 4px;
   --body-technologies-content-padding: 4px 8px;
@@ -97,8 +101,15 @@
     }
       .body .timeline .content ul li {
         display: flex;
-        justify-content: end;
+        margin-bottom: var(--body-timeline-content-margin-bottom);
       }
+        .body .timeline .content ul li .date {
+          padding: var(--body-timeline-content-date-padding);
+          color: var(--color-complementary);
+          width: var(--body-timeline-content-date-width);
+          padding-top: 0;
+          padding-left: 0;
+        }
         .body .timeline .content ul li .tag {
             display: flex;
             align-items: center;
@@ -113,11 +124,21 @@
             font-size: var(--font-size-m);
             margin-left: var(--body-status-text-margin-left);
           }
-        .body .timeline .content ul li .date {
-          padding: var(--body-timeline-content-date-padding);
-          border-right: var(--body-timeline-content-date-border-right);
-          color: var(--color-complementary)
+        .body .timeline .content ul li .metadata {
+          margin-top: var(--body-timeline-content-metadata-margin-top);
+          padding-left: var(--body-timeline-content-metadata-padding-left);
+          color: var(--color-complementary-grey);
+          font-family: var(--font-family-primary);
+          font-size: var(--font-size-s);
         }
+          .body .timeline .content ul li .metadata .metadata-date,
+          .body .timeline .content ul li .metadata .metadata-notes {
+            margin: 0;
+          }
+          .body .timeline .content ul li .metadata .metadata-date {
+            color: var(--color-complementary);
+            margin-top: var(--body-timeline-content-metadata-data-margin-top);
+          }
 
     .body .technologies .content span {
       margin-left: var(--body-technologies-content-margin-left);
