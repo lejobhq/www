@@ -43,19 +43,15 @@ class EditJob extends Component {
                 onInput={this.handleChange}
               >
                 {Object.values(status).map(value => (
-                  <option value={value}>{value}</option>
+                  <option value={value}>
+                    {value.charAt(0) +
+                      value
+                        .slice(1)
+                        .toLowerCase()
+                        .replace(/_/g, " ")}
+                  </option>
                 ))}
               </select>
-            </label>
-            <label>
-              <span>Notes</span>
-              <textarea
-                name="notes"
-                placeholder="(Optional)"
-                onChange={this.handleChange}
-              >
-                {this.state.notes}
-              </textarea>
             </label>
             {[
               status.INTERVIEW_ROUND_1,
@@ -79,6 +75,16 @@ class EditJob extends Component {
                 />
               </label>
             ) : null}
+            <label>
+              <span>Notes</span>
+              <textarea
+                name="notes"
+                placeholder="(Optional)"
+                onChange={this.handleChange}
+              >
+                {this.state.notes}
+              </textarea>
+            </label>
           </div>
           <div class={styles.footer}>
             <Button

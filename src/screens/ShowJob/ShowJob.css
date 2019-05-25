@@ -15,7 +15,7 @@
   --body-status-tag-width: 27px;
   --body-timeline-content-margin-bottom: 16px;
   --body-timeline-content-date-padding: 8px 16px;
-  --body-timeline-content-date-width: 25%;
+  --body-timeline-content-date-width: 80px;
   --body-timeline-content-tag-padding-left: 16px;
   --body-timeline-content-metadata-padding-left: 36px;
   --body-timeline-content-metadata-margin-top: 8px;
@@ -40,6 +40,10 @@
     color: var(--color-complementary);
     text-decoration: none;
   }
+    .title a:hover {
+      opacity: var(--title-icon-hover-opacity);
+      cursor: pointer;
+    }
     .title a span {
       color: var(--color-secondary-1-grey);
     }

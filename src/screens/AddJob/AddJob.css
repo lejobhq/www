@@ -38,3 +38,6 @@
       font-family: var(--font-family-secondary);
       font-size: var(--font-size-m);
     }
+    .form label textarea {
+      resize: none;
+    }
