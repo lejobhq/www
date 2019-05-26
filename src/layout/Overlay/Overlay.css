@@ -10,6 +10,42 @@
   --content-transform-timig-function: cubic-bezier(0, 1, 0.5, 1);
 }
 
+@media(max-width: 888px) {
+  :root {
+    --content-width: 55vw;
+  }
+}
+
+@media(max-width: 777px) {
+  :root {
+    --content-width: 60vw;
+  }
+}
+
+@media(max-width: 666px) {
+  :root {
+    --content-width: 65vw;
+  }
+}
+
+@media(max-width: 555px) {
+  :root {
+    --content-width: 70vw;
+  }
+}
+
+@media(max-width: 500px) {
+  :root {
+    --content-width: 80vw;
+  }
+}
+
+@media(max-width: 400px) {
+  :root {
+    --content-width: 90vw;
+  }
+}
+
 .overlay {
   background-color: var(--color-complementary-darker);
   opacity: var(--overlay-opacity);

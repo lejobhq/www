@@ -47,3 +47,99 @@
   --main-width: 88vw;
   --main-max-width: 1024px;
 }
+
+@media(max-width: 888px) {
+  :root {
+    --font-size-xs: 0.4rem;
+    --font-size-s: 0.75rem;
+    --font-size-m: 1rem;
+    --font-size-l: 1.25rem;
+    --font-size-xl: 1.75rem;
+    --font-size-xxl: 2.25rem;
+    --font-size-xxxl: 3.5rem;
+  }
+}
+
+@media(max-width: 777px) {
+  :root {
+    --font-size-xs: 0.4rem;
+    --font-size-s: 0.7rem;
+    --font-size-m: 0.8rem;
+    --font-size-l: 1rem;
+    --font-size-xl: 1.5rem;
+    --font-size-xxl: 2rem;
+    --font-size-xxxl: 3.5rem;
+  }
+}
+
+@media(max-width: 666px) {
+  :root {
+    --font-size-xs: 0.4rem;
+    --font-size-s: 0.66rem;
+    --font-size-m: 0.75rem;
+    --font-size-l: 0.8rem;
+    --font-size-xl: 1.25rem;
+    --font-size-xxl: 2rem;
+    --font-size-xxxl: 3.5rem;
+
+    --header-height: 66px;
+    --footer-height: 66px;
+  }
+}
+
+@media(max-width: 555px) {
+  :root {
+    --font-size-xs: 0.4rem;
+    --font-size-s: 0.55rem;
+    --font-size-m: 0.7rem;
+    --font-size-l: 0.75rem;
+    --font-size-xl: 1rem;
+    --font-size-xxl: 1.75rem;
+    --font-size-xxxl: 3rem;
+
+    --header-height: 55px;
+    --footer-height: 55px;
+  }
+}
+
+@media(max-width: 500px) {
+  :root {
+    --font-size-xs: 0.4rem;
+    --font-size-s: 0.5rem;
+    --font-size-m: 0.6rem;
+    --font-size-l: 0.7rem;
+    --font-size-xl: 0.9rem;
+    --font-size-xxl: 1.5rem;
+    --font-size-xxxl: 2.5rem;
+  }
+}
+
+@media(max-width: 444px) {
+  :root {
+    --font-size-xs: 0.4rem;
+    --font-size-s: 0.45rem;
+    --font-size-m: 0.55rem;
+    --font-size-l: 0.66rem;
+    --font-size-xl: 0.88rem;
+    --font-size-xxl: 1.25rem;
+    --font-size-xxxl: 2.25rem;
+
+    --header-height: 44px;
+    --footer-height: 44px;
+  }
+}
+
+@media(max-width: 375px) {
+  :root {
+    --font-size-xs: 0.4rem;
+    --font-size-s: 0.45rem;
+    --font-size-m: 0.5rem;
+    --font-size-l: 0.6rem;
+    --font-size-xl: 0.8rem;
+    --font-size-xxl: 1rem;
+    --font-size-xxxl: 2rem;
+
+    --header-height: 33px;
+    --footer-height: 33px;
+  }
+}

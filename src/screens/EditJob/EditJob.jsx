@@ -2,8 +2,6 @@ import preact, { Component } from "preact";
 
 import styles from "./EditJob.css";
 
-import statusToTag from "../../utils/status-to-tag";
-
 import Button from "../../components/Button";
 
 class EditJob extends Component {
