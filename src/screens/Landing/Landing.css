@@ -16,6 +16,41 @@
   --feature-before-content: "✓";
 }
 
+@media(max-width: 888px) {
+  :root {
+    --hero-logo-height: 120px;
+    --hero-logo-width: 120px;
+  }
+}
+
+@media(max-width: 777px) {
+  :root {
+    --hero-logo-height: 110px;
+    --hero-logo-width: 110px;
+  }
+}
+
+@media(max-width: 666px) {
+  :root {
+    --hero-logo-height: 100px;
+    --hero-logo-width: 100px;
+  }
+}
+
+@media(max-width: 555px) {
+  :root {
+    --hero-logo-height: 80px;
+    --hero-logo-width: 80px;
+  }
+}
+
+@media(max-width: 444px) {
+  :root {
+    --hero-logo-height: 70px;
+    --hero-logo-width: 70px;
+  }
+}
+
 /* -- Hero -- */
 .hero {
   padding-top: var(--hero-padding-top);
