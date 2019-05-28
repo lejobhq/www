@@ -264,13 +264,13 @@ class App extends Component {
   onSaveJob({ usersJobId, status, metadata }) {
     const { jwt } = this.state;
     this.setState({ overlay: "loading" });
-    fetch(`${config.api}/api/job`, {
-      method: "PUT",
+    fetch(`${config.api}/api/job/${usersJobId}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         "X-Access-Token": jwt
       },
-      body: JSON.stringify({ usersJobId, status, metadata })
+      body: JSON.stringify({ status, metadata })
     })
       .then(this.parseHTTPResponse)
       .then(_ => {
