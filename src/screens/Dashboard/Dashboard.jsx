@@ -440,6 +440,16 @@ const Dashboard = ({
   onViewJob,
   onEditJob
 }) => {
+  // Sort jobs by updated_at
+  jobs.sort((a, b) =>
+    a.updated_at._seconds < b.updated_at._seconds
+      ? -1
+      : a.updated_at._seconds > b.updated_at._seconds
+      ? 1
+      : 0
+  );
+
+  // Filter jobs by status
   const jobsCreated = jobs.filter(job => job.status === status.CREATED);
   const jobsApplied = jobs.filter(job => job.status === status.APPLIED);
   const jobsRejected = jobs.filter(job => job.status === status.REJECTED);
