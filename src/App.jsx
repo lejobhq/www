@@ -98,7 +98,17 @@ class App extends Component {
         }
       })
         .then(this.parseHTTPResponse)
-        .then(({ data }) => this.setState({ jobs: data.jobs }))
+        .then(({ data }) =>
+          this.setState({
+            jobs: Array.from(data.jobs).sort((a, b) =>
+              a.updated_at._seconds < b.updated_at._seconds
+                ? -1
+                : a.updated_at._seconds > b.updated_at._seconds
+                ? 1
+                : 0
+            )
+          })
+        )
         .catch(err => {
           console.error(err);
           throw new Error(err);
