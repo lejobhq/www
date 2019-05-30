@@ -110,6 +110,12 @@ const ShowJob = ({ job, status, onDismissOverlay, onEditJob }) => (
             <div class={styles.content}>{job.experience}</div>
           </div>
         ) : null}
+        {job.compensation ? (
+          <div class={styles.compensation}>
+            <p class={styles.label}>Compensation</p>
+            <div class={styles.content}>{job.compensation}</div>
+          </div>
+        ) : null}
         {job.location ? (
           <div class={styles.location}>
             <p class={styles.label}>Office Location</p>
@@ -122,7 +128,7 @@ const ShowJob = ({ job, status, onDismissOverlay, onEditJob }) => (
             <div class={styles.content}>{job.visa ? "Yes" : "No"}</div>
           </div>
         ) : null}
-        {job.relocatino != null ? (
+        {job.relocation != null ? (
           <div class={styles.relocation}>
             <p class={styles.label}>Relocation</p>
             <div class={styles.content}>{job.relocation ? "Yes" : "No"}</div>
