@@ -459,17 +459,17 @@ const Dashboard = ({
   );
   const jobsInterview = jobs.filter(job =>
     [
-      job.status.INTERVIEW_ROUND_1,
-      job.status.INTERVIEW_ROUND_2,
-      job.status.INTERVIEW_ROUND_3,
-      job.status.INTERVIEW_ROUND_4,
-      job.status.INTERVIEW_ROUND_5,
-      job.status.INTERVIEW_ROUND_6,
-      job.status.INTERVIEW_ROUND_7,
-      job.status.INTERVIEW_ROUND_8,
-      job.status.INTERVIEW_ROUND_9,
-      job.status.INTERVIEW_ROUND_10
-    ].includes(status)
+      status.INTERVIEW_ROUND_1,
+      status.INTERVIEW_ROUND_2,
+      status.INTERVIEW_ROUND_3,
+      status.INTERVIEW_ROUND_4,
+      status.INTERVIEW_ROUND_5,
+      status.INTERVIEW_ROUND_6,
+      status.INTERVIEW_ROUND_7,
+      status.INTERVIEW_ROUND_8,
+      status.INTERVIEW_ROUND_9,
+      status.INTERVIEW_ROUND_10
+    ].includes(job.status)
   );
   const jobsOffer = jobs.filter(job => job.status === status.OFFER);
   const jobsNegotiating = jobs.filter(job => job.status === status.NEGOTIATING);
