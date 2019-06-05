@@ -19,7 +19,7 @@
   --job-category-header-image-tag-width: 32px;
   --job-category-header-border-bottom: 1px solid var(--color-secondary-1-grey);
   --job-category-body-padding-left: 43px;
-  --job-category-body-li-margin-bottom: 8px;
+  --job-category-body-li-margin-bottom: 12px;
   --job-category-body-title-width: 30%;
   --job-category-body-icons-margin-left: 18px;
   --job-category-body-icon-height: 36px;
@@ -191,21 +191,14 @@
     padding-left: var(--job-category-body-padding-left);
   }
     .job-category-body li {
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: 2fr 4fr 2fr 1.5fr;
+      grid-column-gap: 8px;
       margin-bottom: var(--job-category-body-li-margin-bottom);
     }
       .job-category-body li span {
         font-family: var(--font-family-primary);
         font-size: var(--font-size-l);
-      }
-      .job-category-body li .company {
-        flex-grow: 1;
-      }
-      .job-category-body li .title {
-        flex-grow: 1;
-        text-align: center;
-        width: var(--job-category-body-title-width);
       }
       .job-category-body li .days {
         margin-left: var(--job-category-body-icons-margin-left);
