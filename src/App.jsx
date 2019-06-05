@@ -11,6 +11,7 @@ import NotFound from "./screens/NotFound";
 import AddJob from "./screens/AddJob";
 import EditJob from "./screens/EditJob";
 import ShowJob from "./screens/ShowJob";
+import VerifyJobInfo from "./screens/VerifyJobInfo";
 import OverlayLoading from "./screens/OverlayLoading";
 
 import Overlay from "./layout/Overlay";
@@ -40,6 +41,7 @@ class App extends Component {
     this.onViewJob = this.onViewJob.bind(this);
     this.onEditJob = this.onEditJob.bind(this);
     this.onSaveJob = this.onSaveJob.bind(this);
+    this.onUpdateJobInfo = this.onUpdateJobInfo.bind(this);
   }
 
   componentDidMount() {
@@ -211,6 +213,8 @@ class App extends Component {
       return;
     }
 
+    let job;
+
     fetch(`${config.api}/api/job`, {
       method: "POST",
       headers: {
@@ -218,6 +222,56 @@ class App extends Component {
         "X-Access-Token": jwt
       },
       body: JSON.stringify({ url, metadata: { notes } })
+    })
+      .then(this.parseHTTPResponse)
+      .then(({ data }) => {
+        job = data;
+        // TODO: Ideally, we'd just fetch the job's specific data, and not all the jobs again
+        return fetch(`${config.api}/api/jobs`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Access-Token": jwt
+          }
+        })
+          .then(this.parseHTTPResponse)
+          .then(({ data }) => this.setState({ jobs: data.jobs }))
+          .catch(err => {
+            console.error(err);
+            throw new Error(err);
+          });
+      })
+      .then(_ => {
+        if (job && job.isNew) {
+          this.setState({ overlay: "verify-job", job });
+        } else {
+          this.setState({ overlay: false, route: "dashboard" });
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        this.setState({ overlay: false, route: "error" });
+      });
+  }
+
+  onViewJob(job) {
+    this.setState({ overlay: "show-job", job });
+  }
+
+  onEditJob(job) {
+    this.setState({ overlay: "edit-job", job });
+  }
+
+  onSaveJob({ usersJobId, status, metadata }) {
+    const { jwt } = this.state;
+    this.setState({ overlay: "loading" });
+    fetch(`${config.api}/api/job/${usersJobId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Access-Token": jwt
+      },
+      body: JSON.stringify({ status, metadata })
     })
       .then(this.parseHTTPResponse)
       .then(_ => {
@@ -243,24 +297,16 @@ class App extends Component {
       });
   }
 
-  onViewJob(job) {
-    this.setState({ overlay: "show-job", job });
-  }
-
-  onEditJob(job) {
-    this.setState({ overlay: "edit-job", job });
-  }
-
-  onSaveJob({ usersJobId, status, metadata }) {
+  onUpdateJobInfo({ jobId, data }) {
     const { jwt } = this.state;
     this.setState({ overlay: "loading" });
-    fetch(`${config.api}/api/job/${usersJobId}`, {
-      method: "PATCH",
+    fetch(`${config.api}/api/job/${jobId}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         "X-Access-Token": jwt
       },
-      body: JSON.stringify({ status, metadata })
+      body: JSON.stringify(data)
     })
       .then(this.parseHTTPResponse)
       .then(_ => {
@@ -342,6 +388,15 @@ class App extends Component {
             status={status}
             onDismissOverlay={this.onDismissOverlay}
             onSaveJob={this.onSaveJob}
+          />
+        );
+        break;
+      case "verify-job":
+        OverlayComp = () => (
+          <VerifyJobInfo
+            job={job}
+            onDismissOverlay={this.onDismissOverlay}
+            onUpdateJobInfo={this.onUpdateJobInfo}
           />
         );
         break;
