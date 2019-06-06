@@ -242,7 +242,7 @@ class App extends Component {
           });
       })
       .then(_ => {
-        if (job && job.isNew) {
+        if (job && job.isNew && !job.company) {
           this.setState({ overlay: "verify-job", job });
         } else {
           this.setState({ overlay: false, route: "dashboard" });
