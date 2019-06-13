@@ -183,6 +183,19 @@ class VerifyJobInfo extends Component {
                   jobId: job.id,
                   data: this.state
                 });
+
+                this.setState({
+                  company: "",
+                  title: "",
+                  company_size: "",
+                  experience: "",
+                  location: "",
+                  logo: "",
+                  technologies: [],
+                  compensation: "",
+                  relocation: false,
+                  visa: false
+                });
               }}
             >
               Save Changes
