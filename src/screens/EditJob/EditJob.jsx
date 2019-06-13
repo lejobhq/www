@@ -99,6 +99,8 @@ class EditJob extends Component {
                         {}
                       )
                   });
+
+                  this.setState({ date: "", notes: "" });
                 }
               }}
             >
