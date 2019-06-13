@@ -126,37 +126,57 @@ const JobApplicationList = ({
           <h3>{jobsInterview.length} interview(s) coming up!</h3>
         </div>
         <ul class={styles["job-category-body"]}>
-          {jobsInterview.map(job => (
-            <li>
-              <span class={styles.company}>{job.company}</span>
-              <span class={styles.title}>{job.title}</span>
-              <span class={styles.days}>
-                in{" "}
-                {calculateDifferenceInDays(
-                  job.timeline[job.timeline.length - 1].metadata.date
-                )}{" "}
-                days
-              </span>
-              <span class={styles.icons}>
-                <img
-                  class={styles.icon}
-                  src={viewIcon}
-                  alt="view"
-                  title="View"
-                  onClick={() => onViewJob(job)}
-                  role="presentation"
-                />
-                <img
-                  class={styles.icon}
-                  src={editIcon}
-                  alt="edit"
-                  title="Edit"
-                  onClick={() => onEditJob(job)}
-                  role="presentation"
-                />
-              </span>
-            </li>
-          ))}
+          {jobsInterview
+            .sort((a, b) => {
+              const aDate =
+                a &&
+                a.timeline &&
+                a.timeline[a.timeline.length - 1] &&
+                a.timeline[a.timeline.length - 1].metadata &&
+                a.timeline[a.timeline.length - 1].metadata.date;
+              const bDate =
+                b &&
+                b.timeline &&
+                b.timeline[b.timeline.length - 1] &&
+                b.timeline[b.timeline.length - 1].metadata &&
+                b.timeline[b.timeline.length - 1].metadata.date;
+
+              if (aDate && bDate) {
+                return aDate < bDate ? -1 : aDate > bDate ? 1 : 0;
+              }
+              return 0;
+            })
+            .map(job => (
+              <li>
+                <span class={styles.company}>{job.company}</span>
+                <span class={styles.title}>{job.title}</span>
+                <span class={styles.days}>
+                  in{" "}
+                  {calculateDifferenceInDays(
+                    job.timeline[job.timeline.length - 1].metadata.date
+                  )}{" "}
+                  days
+                </span>
+                <span class={styles.icons}>
+                  <img
+                    class={styles.icon}
+                    src={viewIcon}
+                    alt="view"
+                    title="View"
+                    onClick={() => onViewJob(job)}
+                    role="presentation"
+                  />
+                  <img
+                    class={styles.icon}
+                    src={editIcon}
+                    alt="edit"
+                    title="Edit"
+                    onClick={() => onEditJob(job)}
+                    role="presentation"
+                  />
+                </span>
+              </li>
+            ))}
         </ul>
       </div>
     ) : null}
