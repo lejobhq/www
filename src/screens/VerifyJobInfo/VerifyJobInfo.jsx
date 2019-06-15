@@ -179,11 +179,6 @@ class VerifyJobInfo extends Component {
             <Button
               type="primary"
               handler={() => {
-                onUpdateJobInfo({
-                  jobId: job.id,
-                  data: this.state
-                });
-
                 this.setState({
                   company: "",
                   title: "",
@@ -195,6 +190,11 @@ class VerifyJobInfo extends Component {
                   compensation: "",
                   relocation: false,
                   visa: false
+                });
+
+                onUpdateJobInfo({
+                  jobId: job.id,
+                  data: this.state
                 });
               }}
             >

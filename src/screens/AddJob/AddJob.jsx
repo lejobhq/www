@@ -53,9 +53,8 @@ class AddJob extends Component {
         <Button
           type="primary"
           handler={() => {
-            onAddNewJob({ url, notes });
-
             this.setState({ url: "", notes: "" });
+            onAddNewJob({ url, notes });
           }}
         >
           Add a new job application

@@ -89,6 +89,8 @@ class EditJob extends Component {
               type="primary"
               handler={() => {
                 if (this.state.status !== job.status) {
+                  this.setState({ date: "", notes: "" });
+
                   onSaveJob({
                     usersJobId: job.usersJobId,
                     status: this.state.status,
@@ -99,8 +101,6 @@ class EditJob extends Component {
                         {}
                       )
                   });
-
-                  this.setState({ date: "", notes: "" });
                 }
               }}
             >
