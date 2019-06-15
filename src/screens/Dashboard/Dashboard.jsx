@@ -21,9 +21,20 @@ import viewIcon from "../../images/view.svg";
 import editIcon from "../../images/edit.svg";
 
 function calculateDifferenceInDays(date) {
-  return Math.ceil(
-    Math.abs((Date.now() - new Date(date)) / (24 * 60 * 60 * 1000))
+  const differenceInDays = Math.ceil(
+    (new Date(date) - Date.now()) / (24 * 60 * 60 * 1000)
   );
+
+  if (differenceInDays === 0) {
+    return "today";
+  } else if (differenceInDays > 0) {
+    return `in ${differenceInDays} day${differenceInDays > 1 ? `s` : ``}`;
+  } else {
+    // differenceInDays < 0
+    return `${Math.abs(differenceInDays)} day${
+      Math.abs(differenceInDays) > 1 ? `s` : ``
+    } ago`;
+  }
 }
 
 const Banner = ({ name, onLogOut, onAddNewJobButton }) => (
@@ -151,11 +162,9 @@ const JobApplicationList = ({
                 <span class={styles.company}>{job.company}</span>
                 <span class={styles.title}>{job.title}</span>
                 <span class={styles.days}>
-                  in{" "}
                   {calculateDifferenceInDays(
                     job.timeline[job.timeline.length - 1].metadata.date
-                  )}{" "}
-                  days
+                  )}
                 </span>
                 <span class={styles.icons}>
                   <img
@@ -192,8 +201,7 @@ const JobApplicationList = ({
               <span class={styles.company}>{job.company}</span>
               <span class={styles.title}>{job.title}</span>
               <span class={styles.days}>
-                {calculateDifferenceInDays(job.updated_at._seconds * 1000)}{" "}
-                day(s) ago
+                {calculateDifferenceInDays(job.updated_at._seconds * 1000)}
               </span>
               <span class={styles.icons}>
                 <img
@@ -230,8 +238,7 @@ const JobApplicationList = ({
               <span class={styles.company}>{job.company}</span>
               <span class={styles.title}>{job.title}</span>
               <span class={styles.days}>
-                {calculateDifferenceInDays(job.updated_at._seconds * 1000)}{" "}
-                day(s) ago
+                {calculateDifferenceInDays(job.updated_at._seconds * 1000)}
               </span>
               <span class={styles.icons}>
                 <img
@@ -268,8 +275,7 @@ const JobApplicationList = ({
               <span class={styles.company}>{job.company}</span>
               <span class={styles.title}>{job.title}</span>
               <span class={styles.days}>
-                {calculateDifferenceInDays(job.updated_at._seconds * 1000)}{" "}
-                day(s) ago
+                {calculateDifferenceInDays(job.updated_at._seconds * 1000)}
               </span>
               <span class={styles.icons}>
                 <img
@@ -306,8 +312,7 @@ const JobApplicationList = ({
               <span class={styles.company}>{job.company}</span>
               <span class={styles.title}>{job.title}</span>
               <span class={styles.days}>
-                {calculateDifferenceInDays(job.updated_at._seconds * 1000)}{" "}
-                day(s) ago
+                {calculateDifferenceInDays(job.updated_at._seconds * 1000)}
               </span>
               <span class={styles.icons}>
                 <img
@@ -344,8 +349,7 @@ const JobApplicationList = ({
               <span class={styles.company}>{job.company}</span>
               <span class={styles.title}>{job.title}</span>
               <span class={styles.days}>
-                {calculateDifferenceInDays(job.updated_at._seconds * 1000)}{" "}
-                day(s) ago
+                {calculateDifferenceInDays(job.updated_at._seconds * 1000)}
               </span>
               <span class={styles.icons}>
                 <img
@@ -382,8 +386,7 @@ const JobApplicationList = ({
               <span class={styles.company}>{job.company}</span>
               <span class={styles.title}>{job.title}</span>
               <span class={styles.days}>
-                {calculateDifferenceInDays(job.updated_at._seconds * 1000)}{" "}
-                day(s) ago
+                {calculateDifferenceInDays(job.updated_at._seconds * 1000)}
               </span>
               <span class={styles.icons}>
                 <img
@@ -422,8 +425,7 @@ const JobApplicationList = ({
               <span class={styles.company}>{job.company}</span>
               <span class={styles.title}>{job.title}</span>
               <span class={styles.days}>
-                {calculateDifferenceInDays(job.updated_at._seconds * 1000)}{" "}
-                day(s) ago
+                {calculateDifferenceInDays(job.updated_at._seconds * 1000)}
               </span>
               <span class={styles.icons}>
                 <img
